@@ -18,3 +18,5 @@ sqlite3> .exit
 
 $ php -S 127.0.0.1:8080 var/www/index.php
 ```
+
+![](/bear.png)

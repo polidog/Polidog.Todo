@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1 class="page-header">タスク</h1>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">タスク一覧</div>
+                <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        <li role="presentation"{% if status == 0 %} class="active"{% endif %}><a href="/">すべて</a></li>
+                        <li role="presentation"{% if status == 1 %} class="active"{% endif %}><a href="/?status=1">未完了</a></li>
+                        <li role="presentation"{% if status == 2 %} class="active"{% endif %}><a href="/?status=2">完了</a></li>
+                    </ul>
+
+                    {% if todos %}
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Title</th>
+                                <th>CreatedAt</th>
+                                <th> </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for todo in todos %}
+                                <tr>
+                                    <td>{{ todo.id }}</td>
+                                    <td>{{ todo.title }}</td>
+                                    <td>{{ todo.createdAt|date("Y/m/d H:i:s") }}</td>
+                                    <td>
+                                        {% if todo.status == 1 %}
+                                            <a class="btn btn-danger" href="/done?id={{ todo.id }}">Done</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                    {% else %}
+                        <div class="panel-body">
+                            <p>タスクがありません</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">新規作成</div>
+                <div class="panel-body">
+                    {{ todo_form|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

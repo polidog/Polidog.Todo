@@ -49,7 +49,6 @@ class Index extends ResourceObject
      */
     public function onPost($todo = [])
     {
-//        return $this;
         return $this->createTodo($todo['title']);
     }
 
@@ -73,8 +72,8 @@ class Index extends ResourceObject
             ->eager
             ->request();
 
-        $this->code = $request->code;
-        $this->headers['location'] = "/";
+        $this->code = 301;
+        $this->headers['Location'] = "/";
         $this['todo_form'] = $this->todoForm;
         return $this;
     }

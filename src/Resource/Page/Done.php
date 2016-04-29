@@ -31,9 +31,8 @@ class Done extends ResourceObject
             ;
 
         if ($res->code == 202) {
-            header( "HTTP/1.1 301 Moved Permanently" );
-            header( "Location: /" );
-            exit;
+            $this->headers['Location'] = "/";
+            return $this;
         }
 
         $this->code = $res->code;

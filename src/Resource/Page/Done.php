@@ -30,7 +30,8 @@ class Done extends ResourceObject
             ->request();
             ;
 
-        if ($res->code == 202) {
+        if ($res->code === 202) {
+            $this->code = 301;
             $this->headers['Location'] = "/";
             return $this;
         }

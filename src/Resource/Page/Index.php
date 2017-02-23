@@ -6,7 +6,6 @@ use BEAR\Resource\ResourceObject;
 use BEAR\Sunday\Inject\ResourceInject;
 use Koriym\HttpConstants\ResponseHeader;
 use Koriym\HttpConstants\StatusCode;
-use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 use Ray\WebFormModule\Annotation\FormValidation;
 use Ray\WebFormModule\FormInterface;
@@ -21,7 +20,6 @@ class Index extends ResourceObject
     public $todoForm;
 
     /**
-     * @Inject()
      * @Named("todoForm=todo_form")
      */
     public function __construct(FormInterface $todoForm)

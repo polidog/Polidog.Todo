@@ -10,7 +10,7 @@ class Todos extends ResourceObject
     use AuraSqlInject;
     use QueryLocatorInject;
 
-    public function onGet(string $status = null) : ResourceObject
+    public function onGet(int $status = null) : ResourceObject
     {
         $this->body = is_null($status) ?
             $this->pdo->fetchAll($this->query['todos_list'])

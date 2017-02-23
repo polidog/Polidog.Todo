@@ -56,7 +56,6 @@ class Todo extends ResourceObject
         ];
         $this->pdo->perform($this->query['todo_update'], $value);
         $this->code = 204;
-        $this->headers['location'] = '/todo/?id=' . $id;
 
         return $this;
     }

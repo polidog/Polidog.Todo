@@ -34,15 +34,13 @@ class Todo extends ResourceObject
      */
     public function onPost(string $title, NowInterface $now = null) : ResourceObject
     {
-        $sql = $this->query['todo_insert'];
-        $bind = [
+        $value = [
             'title' => $title,
             'status' => self::INCOMPLETE,
             'created' => (string) $now,
             'updated' => (string) $now,
         ];
-        $statement = $this->pdo->prepare($sql);
-        $statement->execute($bind);
+        $this->pdo->perform($this->query['todo_insert'], $value);
         $id = $this->pdo->lastInsertId();
         $this->code = 201;
         $this->headers['Location'] = "/todo?id={$id}";
@@ -52,12 +50,11 @@ class Todo extends ResourceObject
 
     public function onPut(string $id, string $status) : ResourceObject
     {
-        $sql = $this->query['todo_update'];
-        $statement = $this->pdo->prepare($sql);
-        $statement->execute([
+        $value = [
             'id' => $id,
             'status' => $status
-        ]);
+        ];
+        $this->pdo->perform($this->query['todo_update'], $value);
         $this->code = 204;
         $this->headers['location'] = '/todo/?id=' . $id;
 
@@ -66,9 +63,7 @@ class Todo extends ResourceObject
 
     public function onDelete(string $id) : ResourceObject
     {
-        $sql = $this->query['todo_delete'];;
-        $statement = $this->pdo->prepare($sql);
-        $statement->execute(['id' => $id]);
+        $this->pdo->perform($this->query['todo_delete'], ['id' => $id]);
         $this->code = 204;
 
         return $this;

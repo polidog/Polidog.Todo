@@ -2,7 +2,9 @@
 namespace Polidog\Todo\Resource\App;
 
 use BEAR\Resource\ResourceObject;
+use Koriym\Now\NowInterface;
 use Ray\AuraSqlModule\AuraSqlInject;
+use Ray\Di\Di\Assisted;
 
 class Todo extends ResourceObject
 {
@@ -25,14 +27,17 @@ class Todo extends ResourceObject
         return $this;
     }
 
-    public function onPost(string $title) : ResourceObject
+    /**
+     * @Assisted("now")
+     */
+    public function onPost(string $title, NowInterface $now = null) : ResourceObject
     {
         $sql = 'INSERT INTO todo (title, status, created, updated) VALUES(:title, :status, :created, :updated)';
         $bind = [
             'title' => $title,
             'status' => self::INCOMPLETE,
-            'created' => date('Y-m-d H:i:s'),
-            'updated' => date('Y-m-d H:i:s'),
+            'created' => (string) $now,
+            'updated' => (string) $now,
         ];
         $statement = $this->pdo->prepare($sql);
         $statement->execute($bind);

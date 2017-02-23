@@ -4,6 +4,7 @@ namespace Polidog\Todo\Resource\Page;
 use BEAR\Resource\ResourceObject;
 use BEAR\Sunday\Inject\ResourceInject;
 use Koriym\HttpConstants\ResponseHeader;
+use Koriym\HttpConstants\StatusCode;
 use Polidog\Todo\Resource\App\Todo;
 
 class Done extends ResourceObject
@@ -23,8 +24,8 @@ class Done extends ResourceObject
             ->eager
             ->request();
 
-        if ($ro->code === 202) {
-            $this->code = 301;
+        if ($ro->code === StatusCode::NO_CONTENT) {
+            $this->code = StatusCode::PERMANENT_REDIRECT;
             $this->headers[ResponseHeader::LOCATION] = '/';
 
             return $this;

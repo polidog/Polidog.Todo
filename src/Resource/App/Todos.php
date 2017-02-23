@@ -1,9 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: polidog
- * Date: 2016/04/29
- */
 namespace Polidog\Todo\Resource\App;
 
 use BEAR\Resource\ResourceObject;

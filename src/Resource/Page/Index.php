@@ -30,6 +30,7 @@ class Index extends ResourceObject
         $this->todoForm = $todoForm;
     }
 
+
     public function onGet($status = null)
     {
         $this['todos'] = $this->resource
@@ -40,6 +41,7 @@ class Index extends ResourceObject
             ->request();
         $this['todo_form'] = $this->todoForm;
         $this['status'] = (int)$status;
+
         return $this;
     }
 
@@ -75,6 +77,7 @@ class Index extends ResourceObject
         $this->code = 301;
         $this->headers['Location'] = "/";
         $this['todo_form'] = $this->todoForm;
+
         return $this;
     }
 

@@ -21,14 +21,13 @@ class Todo extends ResourceObject
     public function onGet($id)
     {
         $todo = $this->pdo->fetchOne("SELECT * FROM todo WHERE id = :id", ['id' => $id]);
-
         if (empty($todo)) {
             $this->code = 404;
             return $this;
         }
-
         $todo['status_name'] = $todo['status'] == self::INCOMPLETE ? "完了" : "未完了";
         $this['todo'] = $todo;
+
         return $this;
     }
 
@@ -41,15 +40,13 @@ class Todo extends ResourceObject
             'created' => date("Y-m-d H:i:s"),
             'updated' => date("Y-m-d H:i:s"),
         ];
-
         $statement = $this->pdo->prepare($sql);
         $statement->execute($bind);
-
         $id = $this->pdo->lastInsertId();
-
         $this->code = 201;
         $this->headers['Location'] = "/todo?id={$id}";
 
+        return $this;
     }
 
     public function onPut($id, $status)
@@ -62,6 +59,8 @@ class Todo extends ResourceObject
         ]);
         $this->code = 204;
         $this->headers['location'] = '/todo/?id=' . $id;
+
+        return $this;
     }
 
     public function onDelete($id)
@@ -70,5 +69,7 @@ class Todo extends ResourceObject
         $statement = $this->pdo->prepare($sql);
         $statement->execute(['id' => $id]);
         $this->code = 204;
+
+        return $this;
     }
 }

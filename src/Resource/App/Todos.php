@@ -12,9 +12,9 @@ class Todos extends ResourceObject
 
     public function onGet(string $status = null) : ResourceObject
     {
-        $this->body = ! empty($status) ?
-            $this->pdo->fetchAll($this->query['todos_item'], ['status' => $status])
-            : $this->pdo->fetchAll($this->query['todos_list']);
+        $this->body = is_null($status) ?
+            $this->pdo->fetchAll($this->query['todos_list'])
+            : $this->pdo->fetchAll($this->query['todos_item'], ['status' => $status]);
 
         return $this;
     }

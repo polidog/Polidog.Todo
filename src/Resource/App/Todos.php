@@ -13,7 +13,7 @@ class Todos extends ResourceObject
 {
     use AuraSqlInject;
 
-    public function onGet($status = null)
+    public function onGet(string $status = null) : ResourceObject
     {
         if (!empty($status)) {
             $this->body = $this->pdo->fetchAll('SELECT * FROM todo WHERE status = :status', [

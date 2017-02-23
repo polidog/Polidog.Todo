@@ -16,7 +16,7 @@ class Todo extends ResourceObject
     const INCOMPLETE = 1;
     const COMPLETE = 2;
 
-    public function onGet($id)
+    public function onGet(string $id) : ResourceObject
     {
         $todo = $this->pdo->fetchOne('SELECT * FROM todo WHERE id = :id', ['id' => $id]);
         if (empty($todo)) {
@@ -30,7 +30,7 @@ class Todo extends ResourceObject
         return $this;
     }
 
-    public function onPost($title)
+    public function onPost(string $title) : ResourceObject
     {
         $sql = 'INSERT INTO todo (title, status, created, updated) VALUES(:title, :status, :created, :updated)';
         $bind = [
@@ -48,7 +48,7 @@ class Todo extends ResourceObject
         return $this;
     }
 
-    public function onPut($id, $status)
+    public function onPut(string $id, string $status) : ResourceObject
     {
         $sql = 'UPDATE todo SET status = :status WHERE id = :id';
         $statement = $this->pdo->prepare($sql);
@@ -62,7 +62,7 @@ class Todo extends ResourceObject
         return $this;
     }
 
-    public function onDelete($id)
+    public function onDelete(string $id) : ResourceObject
     {
         $sql = 'DELETE FROM todo WHERE id = :id';
         $statement = $this->pdo->prepare($sql);

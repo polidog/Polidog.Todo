@@ -35,7 +35,7 @@ class Index extends ResourceObject
     /**
      * @Embed(rel="todos", src="app://self/todos{?status}")
      */
-    public function onGet($status = null)
+    public function onGet(string $status = null) : ResourceObject
     {
         $this['todo_form'] = $this->todoForm;
         $this['status'] = (int) $status;
@@ -43,12 +43,7 @@ class Index extends ResourceObject
         return $this;
     }
 
-    /**
-     * @param array $todo
-     *
-     * @return $this
-     */
-    public function onPost($todo = [])
+    public function onPost(array $todo = []) : ResourceObject
     {
         return $this->createTodo($todo['title']);
     }
@@ -62,12 +57,8 @@ class Index extends ResourceObject
 
     /**
      * @FormValidation(form="todoForm", onFailure="onFailure")
-     *
-     * @param string $title
-     *
-     * @return $this
      */
-    public function createTodo($title)
+    public function createTodo(string $title) : ResourceObject
     {
         $request = $this->resource
             ->post

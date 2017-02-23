@@ -14,7 +14,7 @@ class Done extends ResourceObject
 {
     use ResourceInject;
 
-    public function onGet($id)
+    public function onGet(string $id) : ResourceObject
     {
         /** @var ResourceObject $res */
         $res = $this->resource

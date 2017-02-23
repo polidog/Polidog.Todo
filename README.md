@@ -9,6 +9,7 @@ BEAR Sundayで簡単なTodoアプリを作成してみました。
 ```
 $ git clone https://github.com/polidog/Polidog.Todo.git
 $ composer install
+$ cp .env.dist .env
 $ mkdir var/db
 $ sqlite3 var/db/todo.sqlite3
 

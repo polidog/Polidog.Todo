@@ -57,13 +57,12 @@ class Index extends ResourceObject
      */
     public function createTodo(string $title) : ResourceObject
     {
-        $request = $this->resource
+        $$this->resource
             ->post
             ->uri('app://self/todo')
             ->withQuery(['title' => $title])
             ->eager
             ->request();
-
         $this->code = StatusCode::MOVED_PERMANENTLY;
         $this->headers[ResponseHeader::LOCATION] = '/';
         $this['todo_form'] = $this->todoForm;

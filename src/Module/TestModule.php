@@ -3,10 +3,10 @@
 namespace Polidog\Todo\Module;
 
 use BEAR\Package\PackageModule;
+use josegonzalez\Dotenv\Loader as Dotenv;
 use Polidog\Todo\Form\TodoForm;
 use Ray\AuraSqlModule\AuraSqlModule;
 use Ray\Di\AbstractModule;
-use josegonzalez\Dotenv\Loader as Dotenv;
 use Ray\WebFormModule\AuraInputModule;
 use Ray\WebFormModule\FormInterface;
 

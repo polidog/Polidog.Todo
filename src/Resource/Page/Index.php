@@ -24,6 +24,7 @@ class Index extends ResourceObject
      * @Named("todoForm=todo_form")
      *
      * Index constructor.
+     *
      * @param FormInterface $todoForm
      */
     public function __construct(FormInterface $todoForm)
@@ -37,13 +38,14 @@ class Index extends ResourceObject
     public function onGet($status = null)
     {
         $this['todo_form'] = $this->todoForm;
-        $this['status'] = (int)$status;
+        $this['status'] = (int) $status;
 
         return $this;
     }
 
     /**
      * @param array $todo
+     *
      * @return $this
      */
     public function onPost($todo = [])
@@ -54,28 +56,30 @@ class Index extends ResourceObject
     public function onFailure()
     {
         $this->code = 400;
+
         return $this->onGet();
     }
 
     /**
      * @FormValidation(form="todoForm", onFailure="onFailure")
+     *
      * @param string $title
+     *
      * @return $this
      */
     public function createTodo($title)
     {
         $request = $this->resource
             ->post
-            ->uri("app://self/todo")
+            ->uri('app://self/todo')
             ->withQuery(['title' => $title])
             ->eager
             ->request();
 
         $this->code = 301;
-        $this->headers['Location'] = "/";
+        $this->headers['Location'] = '/';
         $this['todo_form'] = $this->todoForm;
 
         return $this;
     }
-
 }

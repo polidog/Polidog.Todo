@@ -4,9 +4,7 @@
  * User: polidog
  * Date: 2016/04/29
  */
-
 namespace Polidog\Todo\Resource\Page;
-
 
 use BEAR\Resource\ResourceObject;
 use BEAR\Sunday\Inject\ResourceInject;
@@ -28,15 +26,16 @@ class Done extends ResourceObject
             ])
             ->eager
             ->request();
-            ;
 
         if ($res->code === 202) {
             $this->code = 301;
-            $this->headers['Location'] = "/";
+            $this->headers['Location'] = '/';
+
             return $this;
         }
 
         $this->code = $res->code;
+
         return $this;
     }
 }

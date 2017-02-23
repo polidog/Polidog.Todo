@@ -4,6 +4,7 @@ namespace Polidog\Todo\Module;
 
 use BEAR\Package\PackageModule;
 use josegonzalez\Dotenv\Loader as Dotenv;
+use Koriym\Now\NowModule;
 use Polidog\Todo\Form\TodoForm;
 use Ray\AuraSqlModule\AuraSqlModule;
 use Ray\Di\AbstractModule;
@@ -31,5 +32,6 @@ class AppModule extends AbstractModule
         $this->install(new AuraInputModule());
         $this->bind(TodoForm::class);
         $this->bind(FormInterface::class)->annotatedWith('todo_form')->to(TodoForm::class);
+        $this->install(new NowModule());
     }
 }

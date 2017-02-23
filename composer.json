@@ -10,7 +10,8 @@
         "josegonzalez/dotenv": "~2.0",
         "madapaja/twig-module": "^1.1",
         "ray/aura-sql-module": "~1.0",
-        "ray/web-form-module": "^0.5.4"
+        "ray/web-form-module": "^0.5.4",
+        "koriym/now": "^1.0"
     },
     "require-dev": {
         "composer/composer": "~1.0",

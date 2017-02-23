@@ -13,5 +13,7 @@ $_ENV['TEST_DIR'] = __DIR__;
 $_ENV['TMP_DIR'] = __DIR__ . '/tmp';
 
 // set the resource client
-$app = (new Bootstrap)->getApp('Polidog\Todo', 'app');
+$app = (new Bootstrap)->getApp('Polidog\Todo', 'test-app');
 $GLOBALS['RESOURCE'] = $app->resource;
+
+copy(dirname(__DIR__) . '/var/db/todo_test.dist.sqlite3', dirname(__DIR__) . '/var/db/todo_test.sqlite3');

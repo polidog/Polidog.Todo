@@ -57,7 +57,7 @@ class Index extends ResourceObject
      */
     public function createTodo(string $title) : ResourceObject
     {
-        $$this->resource
+        $this->resource
             ->post
             ->uri('app://self/todo')
             ->withQuery(['title' => $title])

@@ -2,6 +2,7 @@
 
 namespace Polidog\Todo\Resource\Page;
 
+use BEAR\Resource\Annotation\Embed;
 use BEAR\Resource\ResourceObject;
 use BEAR\Sunday\Inject\ResourceInject;
 use Ray\Di\Di\Inject;
@@ -30,15 +31,11 @@ class Index extends ResourceObject
         $this->todoForm = $todoForm;
     }
 
-
+    /**
+     * @Embed(rel="todos", src="app://self/todos{?status}")
+     */
     public function onGet($status = null)
     {
-        $this['todos'] = $this->resource
-            ->get
-            ->uri('app://self/todos')
-            ->withQuery(['status' => $status])
-            ->eager
-            ->request();
         $this['todo_form'] = $this->todoForm;
         $this['status'] = (int)$status;
 

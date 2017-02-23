@@ -3,19 +3,21 @@ namespace Polidog\Todo\Resource\App;
 
 use BEAR\Resource\ResourceObject;
 use Koriym\Now\NowInterface;
+use Koriym\QueryLocator\QueryLocatorInject;
 use Ray\AuraSqlModule\AuraSqlInject;
 use Ray\Di\Di\Assisted;
 
 class Todo extends ResourceObject
 {
     use AuraSqlInject;
+    use QueryLocatorInject;
 
     const INCOMPLETE = 1;
     const COMPLETE = 2;
 
     public function onGet(string $id) : ResourceObject
     {
-        $todo = $this->pdo->fetchOne('SELECT * FROM todo WHERE id = :id', ['id' => $id]);
+        $todo = $this->pdo->fetchOne($this->query['todo_select'], ['id' => $id]);
         if (empty($todo)) {
             $this->code = 404;
 
@@ -32,7 +34,7 @@ class Todo extends ResourceObject
      */
     public function onPost(string $title, NowInterface $now = null) : ResourceObject
     {
-        $sql = 'INSERT INTO todo (title, status, created, updated) VALUES(:title, :status, :created, :updated)';
+        $sql = $this->query['todo_insert'];
         $bind = [
             'title' => $title,
             'status' => self::INCOMPLETE,
@@ -50,7 +52,7 @@ class Todo extends ResourceObject
 
     public function onPut(string $id, string $status) : ResourceObject
     {
-        $sql = 'UPDATE todo SET status = :status WHERE id = :id';
+        $sql = $this->query['todo_update'];
         $statement = $this->pdo->prepare($sql);
         $statement->execute([
             'id' => $id,
@@ -64,7 +66,7 @@ class Todo extends ResourceObject
 
     public function onDelete(string $id) : ResourceObject
     {
-        $sql = 'DELETE FROM todo WHERE id = :id';
+        $sql = $this->query['todo_delete'];;
         $statement = $this->pdo->prepare($sql);
         $statement->execute(['id' => $id]);
         $this->code = 204;

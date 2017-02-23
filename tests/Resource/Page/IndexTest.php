@@ -2,6 +2,8 @@
 
 namespace Polidog\Todo\Resource\Page;
 
+use BEAR\Package\Bootstrap;
+
 class IndexTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -12,15 +14,15 @@ class IndexTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->resource = clone $GLOBALS['RESOURCE'];
+        $app = (new Bootstrap())->getApp('Polidog\Todo', 'test-html-app');
+        $this->resource = $app->resource;
     }
 
     public function testOnGet()
     {
         // resource request
-        $page = $this->resource->get->uri('page://self/index')->withQuery(['name' => 'koriym'])->eager->request();
+        $page = $this->resource->get->uri('page://self/index')->withQuery([])->eager->request();
         $this->assertSame(200, $page->code);
-        $this->assertSame('Hello koriym', $page['greeting']);
 
         return $page;
     }
@@ -30,7 +32,11 @@ class IndexTest extends \PHPUnit_Framework_TestCase
      */
     public function testView($page)
     {
-        $json = json_decode((string) $page);
-        $this->assertSame('Hello koriym', $json->greeting);
+        $html = (string) $page;
+        $this->assertStringStartsWith('<!DOCTYPE html>', $html);
+        $this->assertStringEndsWith(('</html>'), $html);
+        $expected = '<td>1</td>
+                                    <td>test</td>';
+        $this->assertContains($expected, $html);
     }
 }

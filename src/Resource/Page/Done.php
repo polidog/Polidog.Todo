@@ -12,8 +12,8 @@ class Done extends ResourceObject
 
     public function onGet(string $id) : ResourceObject
     {
-        /** @var ResourceObject $res */
-        $res = $this->resource
+        /* @var $ro ResourceObject */
+        $ro = $this->resource
             ->put
             ->uri('app://self/todo')
             ->withQuery([
@@ -23,14 +23,13 @@ class Done extends ResourceObject
             ->eager
             ->request();
 
-        if ($res->code === 202) {
+        if ($ro->code === 202) {
             $this->code = 301;
             $this->headers[ResponseHeader::LOCATION] = '/';
 
             return $this;
         }
-
-        $this->code = $res->code;
+        $this->code = $ro->code;
 
         return $this;
     }

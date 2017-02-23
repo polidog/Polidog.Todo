@@ -2,6 +2,8 @@
 namespace Polidog\Todo\Resource\App;
 
 use BEAR\Resource\ResourceObject;
+use Koriym\HttpConstants\ResponseHeader;
+use Koriym\HttpConstants\StatusCode;
 use Koriym\Now\NowInterface;
 use Koriym\QueryLocator\QueryLocatorInject;
 use Ray\AuraSqlModule\AuraSqlInject;
@@ -42,8 +44,8 @@ class Todo extends ResourceObject
         ];
         $this->pdo->perform($this->query['todo_insert'], $value);
         $id = $this->pdo->lastInsertId();
-        $this->code = 201;
-        $this->headers['Location'] = "/todo?id={$id}";
+        $this->code = StatusCode::CREATED;
+        $this->headers[ResponseHeader::LOCATION] = "/todo?id={$id}";
 
         return $this;
     }
@@ -55,7 +57,7 @@ class Todo extends ResourceObject
             'status' => $status
         ];
         $this->pdo->perform($this->query['todo_update'], $value);
-        $this->code = 204;
+        $this->code = StatusCode::NO_CONTENT;
 
         return $this;
     }
@@ -63,7 +65,7 @@ class Todo extends ResourceObject
     public function onDelete(string $id) : ResourceObject
     {
         $this->pdo->perform($this->query['todo_delete'], ['id' => $id]);
-        $this->code = 204;
+        $this->code = StatusCode::NO_CONTENT;
 
         return $this;
     }

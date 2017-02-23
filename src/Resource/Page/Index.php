@@ -4,6 +4,8 @@ namespace Polidog\Todo\Resource\Page;
 use BEAR\Resource\Annotation\Embed;
 use BEAR\Resource\ResourceObject;
 use BEAR\Sunday\Inject\ResourceInject;
+use Koriym\HttpConstants\ResponseHeader;
+use Koriym\HttpConstants\StatusCode;
 use Ray\Di\Di\Inject;
 use Ray\Di\Di\Named;
 use Ray\WebFormModule\Annotation\FormValidation;
@@ -62,8 +64,8 @@ class Index extends ResourceObject
             ->eager
             ->request();
 
-        $this->code = 301;
-        $this->headers['Location'] = '/';
+        $this->code = StatusCode::MOVED_PERMANENTLY;
+        $this->headers[ResponseHeader::LOCATION] = '/';
         $this['todo_form'] = $this->todoForm;
 
         return $this;

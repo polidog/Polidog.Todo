@@ -3,6 +3,7 @@ namespace Polidog\Todo\Resource\Page;
 
 use BEAR\Resource\ResourceObject;
 use BEAR\Sunday\Inject\ResourceInject;
+use Koriym\HttpConstants\ResponseHeader;
 use Polidog\Todo\Resource\App\Todo;
 
 class Done extends ResourceObject
@@ -24,7 +25,7 @@ class Done extends ResourceObject
 
         if ($res->code === 202) {
             $this->code = 301;
-            $this->headers['Location'] = '/';
+            $this->headers[ResponseHeader::LOCATION] = '/';
 
             return $this;
         }

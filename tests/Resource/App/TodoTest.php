@@ -3,6 +3,7 @@
 namespace Polidog\Todo\Resource\Page;
 
 use BEAR\Resource\ResourceObject;
+use Koriym\HttpConstants\ResponseHeader;
 use Polidog\Todo\Resource\App\Todo;
 
 class TodoTest extends \PHPUnit_Framework_TestCase
@@ -32,7 +33,7 @@ class TodoTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnGet(ResourceObject $ro)
     {
-        $location = $ro->headers['Location'];
+        $location = $ro->headers[ResponseHeader::LOCATION];
         $page = $this->resource->get->uri('app://self' .  $location)->eager->request();
         $this->assertSame(200, $page->code);
 
@@ -44,7 +45,7 @@ class TodoTest extends \PHPUnit_Framework_TestCase
      */
     public function testOnPut(ResourceObject $ro)
     {
-        $location = $ro->headers['Location'];
+        $location = $ro->headers[ResponseHeader::LOCATION];
         $query = ['status' => Todo::COMPLETE];
         $page = $this->resource->put->uri('app://self' .  $location)->addQuery($query)->eager->request();
         $this->assertSame(204, $page->code);
@@ -58,7 +59,7 @@ class TodoTest extends \PHPUnit_Framework_TestCase
      */
     public function testDelete(ResourceObject $ro)
     {
-        $location = $ro->headers['Location'];
+        $location = $ro->headers[ResponseHeader::LOCATION];
         $page = $this->resource->delete->uri('app://self' .  $location)->eager->request();
         $this->assertSame(204, $page->code);
     }

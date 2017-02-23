@@ -47,7 +47,7 @@ class TodoTest extends \PHPUnit_Framework_TestCase
         $location = $ro->headers['Location'];
         $query = ['status' => Todo::COMPLETE];
         $page = $this->resource->put->uri('app://self' .  $location)->addQuery($query)->eager->request();
-        $this->assertSame(202, $page->code);
+        $this->assertSame(204, $page->code);
         $get = $this->resource->get->uri('app://self' .  $location)->eager->request();
         $status = $get->body['todo']['status'];
         $this->assertSame(Todo::COMPLETE, (int) $status);
@@ -60,6 +60,6 @@ class TodoTest extends \PHPUnit_Framework_TestCase
     {
         $location = $ro->headers['Location'];
         $page = $this->resource->delete->uri('app://self' .  $location)->eager->request();
-        $this->assertSame(200, $page->code);
+        $this->assertSame(204, $page->code);
     }
 }

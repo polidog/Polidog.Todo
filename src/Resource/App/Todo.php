@@ -60,7 +60,7 @@ class Todo extends ResourceObject
             'id' => $id,
             'status' => $status
         ]);
-        $this->code = 202;
+        $this->code = 204;
         $this->headers['location'] = '/todo/?id=' . $id;
     }
 
@@ -69,6 +69,6 @@ class Todo extends ResourceObject
         $sql = "DELETE FROM todo WHERE id = :id";
         $statement = $this->pdo->prepare($sql);
         $statement->execute(['id' => $id]);
-
+        $this->code = 204;
     }
 }

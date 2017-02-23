@@ -12,7 +12,8 @@
         "ray/aura-sql-module": "~1.0",
         "ray/web-form-module": "^0.5.4",
         "koriym/now": "^1.0",
-        "koriym/query-locator": "^1.3"
+        "koriym/query-locator": "^1.3",
+        "koriym/http-constants": "^1.0.1"
     },
     "require-dev": {
         "composer/composer": "~1.0",

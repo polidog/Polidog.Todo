@@ -21,10 +21,6 @@ class Index extends ResourceObject
     /**
      * @Inject()
      * @Named("todoForm=todo_form")
-     *
-     * Index constructor.
-     *
-     * @param FormInterface $todoForm
      */
     public function __construct(FormInterface $todoForm)
     {

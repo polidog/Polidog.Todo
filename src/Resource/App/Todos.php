@@ -15,13 +15,9 @@ class Todos extends ResourceObject
 
     public function onGet(string $status = null) : ResourceObject
     {
-        if (!empty($status)) {
-            $this->body = $this->pdo->fetchAll('SELECT * FROM todo WHERE status = :status', [
-                'status' => $status
-            ]);
-        } else {
-            $this->body = $this->pdo->fetchAll('SELECT * FROM todo');
-        }
+        $this->body = ! empty($status) ?
+            $this->pdo->fetchAll('SELECT * FROM todo WHERE status = :status', ['status' => $status])
+            : $this->pdo->fetchAll('SELECT * FROM todo');
 
         return $this;
     }

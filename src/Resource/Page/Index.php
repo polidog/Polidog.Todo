@@ -45,7 +45,7 @@ class Index extends ResourceObject
 
     public function onFailure()
     {
-        $this->code = 400;
+        $this->code = StatusCode::NOT_FOUND;
 
         return $this->onGet();
     }

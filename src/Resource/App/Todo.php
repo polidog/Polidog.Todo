@@ -21,7 +21,7 @@ class Todo extends ResourceObject
     {
         $todo = $this->pdo->fetchOne($this->query['todo_select'], ['id' => $id]);
         if (empty($todo)) {
-            $this->code = 404;
+            $this->code = StatusCode::NOT_FOUND;
 
             return $this;
         }

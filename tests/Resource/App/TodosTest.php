@@ -1,5 +1,4 @@
 <?php
-
 namespace Polidog\Todo\Resource\Page;
 
 use BEAR\Resource\ResourceObject;

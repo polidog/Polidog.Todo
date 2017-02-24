@@ -1,5 +1,4 @@
 <?php
-
 namespace Polidog\Todo\Module;
 
 use BEAR\Package\PackageModule;

@@ -1,5 +1,4 @@
 <?php
-
 namespace Polidog\Todo;
 
 use BEAR\Package\Bootstrap;

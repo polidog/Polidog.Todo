@@ -1,74 +1,72 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: polidog
- * Date: 2016/04/28
- */
-
 namespace Polidog\Todo\Resource\App;
 
-
 use BEAR\Resource\ResourceObject;
+use Koriym\HttpConstants\ResponseHeader;
+use Koriym\HttpConstants\StatusCode;
+use Koriym\Now\NowInterface;
+use Koriym\QueryLocator\QueryLocatorInject;
 use Ray\AuraSqlModule\AuraSqlInject;
+use Ray\Di\Di\Assisted;
 
 class Todo extends ResourceObject
 {
     use AuraSqlInject;
+    use QueryLocatorInject;
 
     const INCOMPLETE = 1;
     const COMPLETE = 2;
 
-    public function onGet($id)
+    public function onGet(string $id) : ResourceObject
     {
-        $todo = $this->pdo->fetchOne("SELECT * FROM todo WHERE id = :id", ['id' => $id]);
-
+        $todo = $this->pdo->fetchOne($this->query['todo_select'], ['id' => $id]);
         if (empty($todo)) {
             $this->code = 404;
+
             return $this;
         }
-
-        $todo['status_name'] = $todo['status'] == self::INCOMPLETE ? "完了" : "未完了";
+        $todo['status_name'] = $todo['status'] == self::INCOMPLETE ? '完了' : '未完了';
         $this['todo'] = $todo;
+
         return $this;
     }
 
-    public function onPost($title)
+    /**
+     * @Assisted("now")
+     */
+    public function onPost(string $title, NowInterface $now = null) : ResourceObject
     {
-        $sql = 'INSERT INTO todo (title, status, created, updated) VALUES(:title, :status, :created, :updated)';
-        $bind = [
+        $value = [
             'title' => $title,
             'status' => self::INCOMPLETE,
-            'created' => date("Y-m-d H:i:s"),
-            'updated' => date("Y-m-d H:i:s"),
+            'created' => (string) $now,
+            'updated' => (string) $now,
         ];
-
-        $statement = $this->pdo->prepare($sql);
-        $statement->execute($bind);
-
+        $this->pdo->perform($this->query['todo_insert'], $value);
         $id = $this->pdo->lastInsertId();
+        $this->code = StatusCode::CREATED;
+        $this->headers[ResponseHeader::LOCATION] = "/todo?id={$id}";
 
-        $this->code = 201;
-        $this->headers['Location'] = "/todo?id={$id}";
-
+        return $this;
     }
 
-    public function onPut($id, $status)
+    public function onPut(string $id, string $status) : ResourceObject
     {
-        $sql = "UPDATE todo SET status = :status WHERE id = :id";
-        $statement = $this->pdo->prepare($sql);
-        $statement->execute([
+        $value = [
             'id' => $id,
             'status' => $status
-        ]);
-        $this->code = 202;
-        $this->headers['location'] = '/todo/?id=' . $id;
+        ];
+        $this->pdo->perform($this->query['todo_update'], $value);
+        $this->code = StatusCode::NO_CONTENT;
+
+        return $this;
     }
 
-    public function onDelete($id)
+    public function onDelete(string $id) : ResourceObject
     {
-        $sql = "DELETE FROM todo WHERE id = :id";
-        $statement = $this->pdo->prepare($sql);
-        $statement->execute(['id' => $id]);
+        $this->pdo->perform($this->query['todo_delete'], ['id' => $id]);
+        $this->code = StatusCode::NO_CONTENT;
 
+        return $this;
     }
 }

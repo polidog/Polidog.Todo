@@ -35,8 +35,5 @@ class IndexTest extends \PHPUnit_Framework_TestCase
         $html = (string) $page;
         $this->assertStringStartsWith('<!DOCTYPE html>', $html);
         $this->assertStringEndsWith(('</html>'), $html);
-        $expected = '<td>1</td>
-                                    <td>test</td>';
-        $this->assertContains($expected, $html);
     }
 }

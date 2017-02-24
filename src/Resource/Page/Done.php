@@ -1,25 +1,20 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: polidog
- * Date: 2016/04/29
- */
-
 namespace Polidog\Todo\Resource\Page;
-
 
 use BEAR\Resource\ResourceObject;
 use BEAR\Sunday\Inject\ResourceInject;
+use Koriym\HttpConstants\ResponseHeader;
+use Koriym\HttpConstants\StatusCode;
 use Polidog\Todo\Resource\App\Todo;
 
 class Done extends ResourceObject
 {
     use ResourceInject;
 
-    public function onGet($id)
+    public function onGet(string $id) : ResourceObject
     {
-        /** @var ResourceObject $res */
-        $res = $this->resource
+        /* @var $ro ResourceObject */
+        $ro = $this->resource
             ->put
             ->uri('app://self/todo')
             ->withQuery([
@@ -28,15 +23,15 @@ class Done extends ResourceObject
             ])
             ->eager
             ->request();
-            ;
 
-        if ($res->code === 202) {
-            $this->code = 301;
-            $this->headers['Location'] = "/";
+        if ($ro->code === StatusCode::NO_CONTENT) {
+            $this->code = StatusCode::PERMANENT_REDIRECT;
+            $this->headers[ResponseHeader::LOCATION] = '/';
+
             return $this;
         }
+        $this->code = $ro->code;
 
-        $this->code = $res->code;
         return $this;
     }
 }

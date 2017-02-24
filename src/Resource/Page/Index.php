@@ -1,10 +1,11 @@
 <?php
-
 namespace Polidog\Todo\Resource\Page;
 
+use BEAR\Resource\Annotation\Embed;
 use BEAR\Resource\ResourceObject;
 use BEAR\Sunday\Inject\ResourceInject;
-use Ray\Di\Di\Inject;
+use Koriym\HttpConstants\ResponseHeader;
+use Koriym\HttpConstants\StatusCode;
 use Ray\Di\Di\Named;
 use Ray\WebFormModule\Annotation\FormValidation;
 use Ray\WebFormModule\FormInterface;
@@ -19,35 +20,25 @@ class Index extends ResourceObject
     public $todoForm;
 
     /**
-     * @Inject()
      * @Named("todoForm=todo_form")
-     *
-     * Index constructor.
-     * @param FormInterface $todoForm
      */
     public function __construct(FormInterface $todoForm)
     {
         $this->todoForm = $todoForm;
     }
 
-    public function onGet($status = null)
+    /**
+     * @Embed(rel="todos", src="app://self/todos{?status}")
+     */
+    public function onGet(string $status = null) : ResourceObject
     {
-        $this['todos'] = $this->resource
-            ->get
-            ->uri('app://self/todos')
-            ->withQuery(['status' => $status])
-            ->eager
-            ->request();
         $this['todo_form'] = $this->todoForm;
-        $this['status'] = (int)$status;
+        $this['status'] = (int) $status;
+
         return $this;
     }
 
-    /**
-     * @param array $todo
-     * @return $this
-     */
-    public function onPost($todo = [])
+    public function onPost(array $todo = []) : ResourceObject
     {
         return $this->createTodo($todo['title']);
     }
@@ -55,27 +46,25 @@ class Index extends ResourceObject
     public function onFailure()
     {
         $this->code = 400;
+
         return $this->onGet();
     }
 
     /**
      * @FormValidation(form="todoForm", onFailure="onFailure")
-     * @param string $title
-     * @return $this
      */
-    public function createTodo($title)
+    public function createTodo(string $title) : ResourceObject
     {
-        $request = $this->resource
+        $this->resource
             ->post
-            ->uri("app://self/todo")
+            ->uri('app://self/todo')
             ->withQuery(['title' => $title])
             ->eager
             ->request();
-
-        $this->code = 301;
-        $this->headers['Location'] = "/";
+        $this->code = StatusCode::MOVED_PERMANENTLY;
+        $this->headers[ResponseHeader::LOCATION] = '/';
         $this['todo_form'] = $this->todoForm;
+
         return $this;
     }
-
 }

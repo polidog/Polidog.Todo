@@ -1,30 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: polidog
- * Date: 2016/04/29
- */
-
 namespace Polidog\Todo\Resource\App;
 
-
 use BEAR\Resource\ResourceObject;
+use Koriym\QueryLocator\QueryLocatorInject;
 use Ray\AuraSqlModule\AuraSqlInject;
 
 class Todos extends ResourceObject
 {
     use AuraSqlInject;
+    use QueryLocatorInject;
 
-
-    public function onGet($status = null)
+    public function onGet(int $status = null) : ResourceObject
     {
-        if (!empty($status)) {
-            $this->body = $this->pdo->fetchAll("SELECT * FROM todo WHERE status = :status",[
-                'status' => $status
-            ]);
-        } else {
-            $this->body = $this->pdo->fetchAll("SELECT * FROM todo");
-        }
+        $this->body = is_null($status) ?
+            $this->pdo->fetchAll($this->query['todos_list'])
+            : $this->pdo->fetchAll($this->query['todos_item'], ['status' => $status]);
+
         return $this;
     }
 }

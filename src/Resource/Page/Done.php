@@ -13,8 +13,7 @@ class Done extends ResourceObject
 
     public function onGet(string $id) : ResourceObject
     {
-        /* @var $ro ResourceObject */
-        $ro = $this->resource
+        $this->resource
             ->put
             ->uri('app://self/todo')
             ->withQuery([
@@ -23,14 +22,8 @@ class Done extends ResourceObject
             ])
             ->eager
             ->request();
-
-        if ($ro->code === StatusCode::NO_CONTENT) {
-            $this->code = StatusCode::PERMANENT_REDIRECT;
-            $this->headers[ResponseHeader::LOCATION] = '/';
-
-            return $this;
-        }
-        $this->code = $ro->code;
+        $this->code = StatusCode::PERMANENT_REDIRECT;
+        $this->headers[ResponseHeader::LOCATION] = '/';
 
         return $this;
     }

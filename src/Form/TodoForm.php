@@ -1,9 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: polidog
- * Date: 2016/04/28
- */
 namespace Polidog\Todo\Form;
 
 use Aura\Html\Helper\Tag;

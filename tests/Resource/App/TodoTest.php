@@ -4,6 +4,7 @@ namespace Polidog\Todo\Resource\Page;
 
 use BEAR\Resource\ResourceObject;
 use Koriym\HttpConstants\ResponseHeader;
+use Koriym\HttpConstants\StatusCode;
 use Polidog\Todo\Resource\App\Todo;
 
 class TodoTest extends \PHPUnit_Framework_TestCase
@@ -23,7 +24,7 @@ class TodoTest extends \PHPUnit_Framework_TestCase
     {
         $query = ['title' => 'test'];
         $page = $this->resource->post->uri('app://self/todo')->withQuery($query)->eager->request();
-        $this->assertSame(201, $page->code);
+        $this->assertSame(StatusCode::CREATED, $page->code);
 
         return $page;
     }
@@ -35,9 +36,15 @@ class TodoTest extends \PHPUnit_Framework_TestCase
     {
         $location = $ro->headers[ResponseHeader::LOCATION];
         $page = $this->resource->get->uri('app://self' .  $location)->eager->request();
-        $this->assertSame(200, $page->code);
+        $this->assertSame(StatusCode::OK, $page->code);
 
         return [$location, $ro];
+    }
+
+    public function testOnGet404()
+    {
+        $page = $this->resource->get->uri('app://self/todo?id=0')->eager->request();
+        $this->assertSame(StatusCode::NOT_FOUND, $page->code);
     }
 
     /**
@@ -48,7 +55,7 @@ class TodoTest extends \PHPUnit_Framework_TestCase
         $location = $ro->headers[ResponseHeader::LOCATION];
         $query = ['status' => Todo::COMPLETE];
         $page = $this->resource->put->uri('app://self' .  $location)->addQuery($query)->eager->request();
-        $this->assertSame(204, $page->code);
+        $this->assertSame(StatusCode::NO_CONTENT, $page->code);
         $get = $this->resource->get->uri('app://self' .  $location)->eager->request();
         $status = $get->body['todo']['status'];
         $this->assertSame(Todo::COMPLETE, (int) $status);
@@ -61,6 +68,8 @@ class TodoTest extends \PHPUnit_Framework_TestCase
     {
         $location = $ro->headers[ResponseHeader::LOCATION];
         $page = $this->resource->delete->uri('app://self' .  $location)->eager->request();
-        $this->assertSame(204, $page->code);
+        $this->assertSame(StatusCode::NO_CONTENT, $page->code);
+        $page = $this->resource->get->uri('app://self' .  $location)->eager->request();
+        $this->assertSame(StatusCode::NOT_FOUND, $page->code);
     }
 }

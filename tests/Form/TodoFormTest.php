@@ -41,4 +41,15 @@ class TodoFormTest extends \PHPUnit_Framework_TestCase
         $isValid = $this->form->apply($submit);
         $this->assertTrue($isValid);
     }
+
+    public function testFormView()
+    {
+        $formHtml = (string) $this->form;
+        $expected = '<form method="post" action="/" enctype="multipart/form-data"><div class="form-group"><input id="todo[title]" type="text" name="todo[title]" class="form-control" size="20" />
+</div>
+<input type="submit" name="submit" value="登録" class="btn btn-primary" />
+</form>';
+        $this->assertSame($expected, $formHtml);
+    }
+
 }

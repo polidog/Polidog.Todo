@@ -54,7 +54,7 @@ class Todo extends ResourceObject
     {
         $value = [
             'id' => $id,
-            'status' => $status
+            'status' => (int) $status
         ];
         $this->pdo->perform($this->query['todo_update'], $value);
         $this->code = StatusCode::NO_CONTENT;

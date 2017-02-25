@@ -51,5 +51,4 @@ class TodoFormTest extends \PHPUnit_Framework_TestCase
 </form>';
         $this->assertSame($expected, $formHtml);
     }
-
 }

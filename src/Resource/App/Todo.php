@@ -50,11 +50,11 @@ class Todo extends ResourceObject
         return $this;
     }
 
-    public function onPut(string $id, string $status) : ResourceObject
+    public function onPut(string $id, int $status) : ResourceObject
     {
         $value = [
             'id' => $id,
-            'status' => (int) $status
+            'status' => $status
         ];
         $this->pdo->perform($this->query['todo_update'], $value);
         $this->code = StatusCode::NO_CONTENT;

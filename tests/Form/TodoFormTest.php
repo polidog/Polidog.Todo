@@ -1,6 +1,4 @@
 <?php
-namespace Polidog\Todo\Resource\Page;
-
 namespace Polidog\Todo\Form;
 
 use Ray\WebFormModule\FormFactory;

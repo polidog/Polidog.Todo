@@ -1,0 +1,23 @@
+language: php
+php:
+  - 7.0
+  - 7.1
+  - hhvm
+sudo: false
+cache:
+  directories:
+    - $HOME/.composer/cache
+matrix:
+  include:
+    - php: 7.0
+    - php: 7.1
+    - php: hhvm
+before_script:
+  - composer self-update
+  - if [ -z "$dependencies" ]; then composer install; fi;
+script:
+ - if [ "$TRAVIS_PHP_VERSION" != "7.1" ]; then phpunit; fi
+ - if [ "$TRAVIS_PHP_VERSION" == "7.1" ]; then phpunit --coverage-text --coverage-clover=coverage.clover; fi
+after_script:
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - if [ "$TRAVIS_PHP_VERSION" == "7.1" ]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi

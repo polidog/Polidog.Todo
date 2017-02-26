@@ -50,7 +50,7 @@ class Todo extends ResourceObject
         return $this;
     }
 
-    public function onPut(string $id, string $status) : ResourceObject
+    public function onPut(string $id, int $status) : ResourceObject
     {
         $value = [
             'id' => $id,

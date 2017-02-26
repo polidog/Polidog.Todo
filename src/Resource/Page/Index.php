@@ -38,22 +38,10 @@ class Index extends ResourceObject
         return $this;
     }
 
-    public function onPost(array $todo = []) : ResourceObject
-    {
-        return $this->createTodo($todo['title']);
-    }
-
-    public function onFailure()
-    {
-        $this->code = StatusCode::BAD_REQUEST;
-
-        return $this->onGet();
-    }
-
     /**
      * @FormValidation(form="todoForm", onFailure="onFailure")
      */
-    public function createTodo(string $title) : ResourceObject
+    public function onPost(string $title) : ResourceObject
     {
         $this->resource
             ->post
@@ -66,5 +54,12 @@ class Index extends ResourceObject
         $this['todo_form'] = $this->todoForm;
 
         return $this;
+    }
+
+    public function onFailure()
+    {
+        $this->code = StatusCode::BAD_REQUEST;
+
+        return $this->onGet();
     }
 }

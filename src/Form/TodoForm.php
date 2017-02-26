@@ -13,8 +13,8 @@ class TodoForm extends AbstractForm
     {
         $this->setField('title')
             ->setAttribs([
-                'id' => 'todo[title]',
-                'name' => 'todo[title]',
+                'id' => 'title',
+                'name' => 'title',
                 'class' => 'form-control',
                 'size' => 20
             ]);

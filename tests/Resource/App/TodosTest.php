@@ -1,5 +1,5 @@
 <?php
-namespace Polidog\Todo\Resource\Page;
+namespace Polidog\Todo\Resource\App;
 
 use BEAR\Resource\ResourceObject;
 use Koriym\HttpConstants\ResponseHeader;

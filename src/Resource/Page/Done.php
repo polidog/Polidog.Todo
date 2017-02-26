@@ -1,6 +1,7 @@
 <?php
 namespace Polidog\Todo\Resource\Page;
 
+use BEAR\Resource\Annotation\Link;
 use BEAR\Resource\ResourceObject;
 use BEAR\Sunday\Inject\ResourceInject;
 use Koriym\HttpConstants\ResponseHeader;
@@ -11,17 +12,12 @@ class Done extends ResourceObject
 {
     use ResourceInject;
 
+    /**
+     * @Link(rel="complete", href="app://self/todo?status=2", method="put")
+     */
     public function onGet(string $id) : ResourceObject
     {
-        $this->resource
-            ->put
-            ->uri('app://self/todo')
-            ->withQuery([
-                'id' => $id,
-                'status' => Todo::COMPLETE
-            ])
-            ->eager
-            ->request();
+        $this->resource->href('complete', ['id' => $id]);
         $this->code = StatusCode::PERMANENT_REDIRECT;
         $this->headers[ResponseHeader::LOCATION] = '/';
 

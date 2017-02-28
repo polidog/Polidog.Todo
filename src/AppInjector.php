@@ -43,7 +43,7 @@ final class AppInjector implements InjectorInterface
     {
         $module = $this->newModule($appMeta, $contexts);
         $module->override(new AppMetaModule($appMeta));
-        $tmpDir = $appMeta->tmpDir . '/app_injector';
+        $tmpDir = $appMeta->tmpDir . '';
         if (! @mkdir($tmpDir) && ! is_dir($tmpDir)) {
             throw new NotWritableException($tmpDir);
         }

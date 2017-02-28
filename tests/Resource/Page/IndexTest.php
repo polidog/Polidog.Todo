@@ -21,7 +21,6 @@ class IndexTest extends \PHPUnit_Framework_TestCase
 
     public function testOnGet()
     {
-        // resource request
         $page = $this->resource->get->uri('page://self/index')->withQuery([])->eager->request();
         $this->assertSame(StatusCode::OK, $page->code);
 

@@ -13,7 +13,7 @@ class TodosTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->resource = (new AppInjector('Polidog\Todo', 'prod-test-app'))->getInstance(ResourceInterface::class);
+        $this->resource = (new AppInjector('Polidog\Todo', 'test-app'))->getInstance(ResourceInterface::class);
     }
 
     public function testOnPost()

@@ -36,8 +36,6 @@ class TodoTest extends \PHPUnit_Framework_TestCase
         $location = $ro->headers[ResponseHeader::LOCATION];
         $page = $this->resource->get->uri('app://self' .  $location)->eager->request();
         $this->assertSame(StatusCode::OK, $page->code);
-
-        return [$location, $ro];
     }
 
     public function testOnGet404()

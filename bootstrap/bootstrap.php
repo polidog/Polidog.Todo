@@ -1,38 +1,24 @@
 <?php
 
-/**
- * @global string $context
- */
-namespace Polidog\Todo;
-
 use BEAR\Package\Bootstrap;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
 load: {
-    /* @var $loader \Composer\Autoload\ClassLoader */
     $loader = require dirname(__DIR__) . '/vendor/autoload.php';
     AnnotationRegistry::registerLoader([$loader, 'loadClass']);
 }
-
 route: {
-    $app = (new Bootstrap)->getApp(__NAMESPACE__, $context);
-    /* @var $app AbstractApp \BEAR\Sunday\Extension\Application\AbstractApp */
-    $request = $app->router->match($GLOBALS, $_SERVER);
+    /* @global string $context */
+    $app = (new Bootstrap)->getApp('Polidog\Todo', $context);
+    $req = $app->router->match($GLOBALS, $_SERVER);
 }
-
 try {
-    // resource request
-    $page = $app->resource
-        ->{$request->method}
-        ->uri($request->path)
-        ->withQuery($request->query)
-        ->request();
-    /* @var $page \BEAR\Resource\Request */
-
-    // representation transfer
-    $page()->transfer($app->responder, $_SERVER);
+    $resourceReuest = $app->resource->{$req->method}->uri($req->path)->withQuery($req->query)->request();
+    /* @var $resourceReuest \BEAR\Resource\AbstractRequest */
+    $resource = $resourceReuest();
+    $resource->transfer($app->responder, $_SERVER);
     exit(0);
 } catch (\Exception $e) {
-    $app->error->handle($e, $request)->transfer();
+    $app->error->handle($e, $req)->transfer();
     exit(1);
 }

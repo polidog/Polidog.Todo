@@ -1,9 +1,8 @@
 <?php
 namespace Polidog\Todo\Resource\App;
 
-use BEAR\Resource\ResourceObject;
-use Koriym\HttpConstants\ResponseHeader;
-use Polidog\Todo\Resource\App\Todo;
+use BEAR\Resource\ResourceInterface;
+use Polidog\Todo\AppInjector;
 
 class TodosTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,8 +13,7 @@ class TodosTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        parent::setUp();
-        $this->resource = clone $GLOBALS['RESOURCE'];
+        $this->resource = (new AppInjector('Polidog\Todo', 'prod-test-app'))->getInstance(ResourceInterface::class);
     }
 
     public function testOnPost()

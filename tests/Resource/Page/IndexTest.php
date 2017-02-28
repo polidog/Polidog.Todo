@@ -1,10 +1,11 @@
 <?php
 namespace Polidog\Todo\Resource\Page;
 
-use BEAR\Package\Bootstrap;
+use BEAR\Resource\ResourceInterface;
 use BEAR\Resource\ResourceObject;
 use Koriym\HttpConstants\ResponseHeader;
 use Koriym\HttpConstants\StatusCode;
+use Polidog\Todo\AppInjector;
 
 class IndexTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,9 +16,7 @@ class IndexTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        parent::setUp();
-        $app = (new Bootstrap())->getApp('Polidog\Todo', 'test-html-app');
-        $this->resource = $app->resource;
+        $this->resource = (new AppInjector('Polidog\Todo', 'test-html-app'))->getInstance(ResourceInterface::class);
     }
 
     public function testOnGet()

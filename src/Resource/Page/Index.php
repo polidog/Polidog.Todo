@@ -2,6 +2,7 @@
 namespace Polidog\Todo\Resource\Page;
 
 use BEAR\Resource\Annotation\Embed;
+use BEAR\Resource\Annotation\Link;
 use BEAR\Resource\ResourceObject;
 use BEAR\Sunday\Inject\ResourceInject;
 use Koriym\HttpConstants\ResponseHeader;
@@ -40,15 +41,11 @@ class Index extends ResourceObject
 
     /**
      * @FormValidation(form="todoForm", onFailure="onFailure")
+     * @Link(rel="create", href="app://self/todo", method="post")
      */
     public function onPost(string $title) : ResourceObject
     {
-        $this->resource
-            ->post
-            ->uri('app://self/todo')
-            ->withQuery(['title' => $title])
-            ->eager
-            ->request();
+        $this->resource->href('create', ['title' => $title]);
         $this->code = StatusCode::MOVED_PERMANENTLY;
         $this->headers[ResponseHeader::LOCATION] = '/';
         $this['todo_form'] = $this->todoForm;

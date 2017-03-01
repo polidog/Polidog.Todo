@@ -23,6 +23,10 @@ class IndexTest extends \PHPUnit_Framework_TestCase
     {
         $page = $this->resource->get->uri('page://self/index')->withQuery([])->eager->request();
         $this->assertSame(StatusCode::OK, $page->code);
+        $todos = $page['todos'];
+        /* @var $todos \BEAR\Resource\AbstractRequest */
+        $requestString = $todos->toUri();
+        $this->assertSame('app://self/todos', $requestString);
 
         return $page;
     }

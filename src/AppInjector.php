@@ -53,6 +53,12 @@ final class AppInjector implements InjectorInterface
             $compiler = new DiCompiler($module, $tmpDir);
             $compiler->compile();
             $injector = (new ScriptInjector($tmpDir))->getInstance(InjectorInterface::class);
+            register_shutdown_function(function () use ($tmpDir) {
+                foreach (new \RecursiveDirectoryIterator($tmpDir, \FilesystemIterator::SKIP_DOTS) as $file) {
+                    unlink($file);
+                }
+                rmdir($tmpDir);
+            });
         }
 
         return $injector;

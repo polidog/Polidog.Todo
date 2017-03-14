@@ -12,3 +12,5 @@ vendor
 var/log
 var/tmp
 var/db
+.php_cs
+*.cache

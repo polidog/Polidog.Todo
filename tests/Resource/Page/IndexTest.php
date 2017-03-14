@@ -5,7 +5,7 @@ use BEAR\Resource\ResourceInterface;
 use BEAR\Resource\ResourceObject;
 use Koriym\HttpConstants\ResponseHeader;
 use Koriym\HttpConstants\StatusCode;
-use Polidog\Todo\AppInjector;
+use BEAR\Package\AppInjector;
 
 class IndexTest extends \PHPUnit_Framework_TestCase
 {

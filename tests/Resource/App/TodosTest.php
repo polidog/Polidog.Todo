@@ -2,7 +2,7 @@
 namespace Polidog\Todo\Resource\App;
 
 use BEAR\Resource\ResourceInterface;
-use Polidog\Todo\AppInjector;
+use BEAR\Package\AppInjector;
 
 class TodosTest extends \PHPUnit_Framework_TestCase
 {

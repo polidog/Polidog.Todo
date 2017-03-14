@@ -3,7 +3,7 @@ namespace Polidog\Todo\Resource\Page;
 
 use BEAR\Resource\ResourceInterface;
 use Koriym\HttpConstants\StatusCode;
-use Polidog\Todo\AppInjector;
+use BEAR\Package\AppInjector;
 
 class DoneTest extends \PHPUnit_Framework_TestCase
 {

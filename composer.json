@@ -24,6 +24,9 @@
         }
     },
     "scripts": {
+        "setup": [
+            "php bin/init_db.php"
+        ],
         "test": [
             "phptest"
         ],
@@ -31,7 +34,7 @@
             "php-cs-fixer fix -v"
         ],
         "clean": "rm -rf var/tmp/* var/log/* tests/tmp/*",
-        "serve": "php -S 127.0.0.1:8080 -t var/www",
+        "serve": "php -S 127.0.0.1:8080 -t public",
         "api": "php bootstrap/api",
         "web": "php bootstrap/web"
     }

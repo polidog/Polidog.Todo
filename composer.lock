@@ -611,16 +611,16 @@
         },
         {
             "name": "bear/resource",
-            "version": "1.4.2",
+            "version": "1.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bearsunday/BEAR.Resource.git",
-                "reference": "3d36dcc51c860641e30900ae2e3f7c41b6b6416a"
+                "reference": "94d6ff4992326d15e6d712606cb22ed59e9302fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bearsunday/BEAR.Resource/zipball/3d36dcc51c860641e30900ae2e3f7c41b6b6416a",
-                "reference": "3d36dcc51c860641e30900ae2e3f7c41b6b6416a",
+                "url": "https://api.github.com/repos/bearsunday/BEAR.Resource/zipball/94d6ff4992326d15e6d712606cb22ed59e9302fa",
+                "reference": "94d6ff4992326d15e6d712606cb22ed59e9302fa",
                 "shasum": ""
             },
             "require": {
@@ -665,7 +665,7 @@
                 "protocol",
                 "rest"
             ],
-            "time": "2017-02-28T03:45:42+00:00"
+            "time": "2017-03-17T11:27:45+00:00"
         },
         {
             "name": "bear/sunday",

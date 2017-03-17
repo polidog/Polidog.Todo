@@ -23,6 +23,7 @@ class TodoTest extends \PHPUnit_Framework_TestCase
     {
         $query = ['title' => 'test'];
         $page = $this->resource->post->uri('app://self/todo')->withQuery($query)->eager->request();
+        /* @var $page ResourceObject */
         $this->assertSame(StatusCode::CREATED, $page->code);
 
         return $page;

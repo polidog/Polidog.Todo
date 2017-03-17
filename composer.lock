@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d496c4b7f2b7281ac9b872bcf9c1460d",
+    "content-hash": "78a70d98f7aa37d84de575cee89dc2e9",
     "packages": [
         {
             "name": "aura/cli",
@@ -483,23 +483,24 @@
         },
         {
             "name": "bear/app-meta",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bearsunday/BEAR.AppMeta.git",
-                "reference": "ddf12fca79d7cc38a535b7cc6b021d0919147796"
+                "reference": "1456276b436074c576bb35a1fcff1d3a7ae5ea4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bearsunday/BEAR.AppMeta/zipball/ddf12fca79d7cc38a535b7cc6b021d0919147796",
-                "reference": "ddf12fca79d7cc38a535b7cc6b021d0919147796",
+                "url": "https://api.github.com/repos/bearsunday/BEAR.AppMeta/zipball/1456276b436074c576bb35a1fcff1d3a7ae5ea4d",
+                "reference": "1456276b436074c576bb35a1fcff1d3a7ae5ea4d",
                 "shasum": ""
             },
             "require": {
                 "koriym/psr4list": "~1.0"
             },
             "require-dev": {
-                "bear/resource": "~1.0"
+                "bear/resource": "~1.0",
+                "phpunit/phpunit": "^5.7"
             },
             "type": "library",
             "autoload": {
@@ -515,25 +516,25 @@
             "keywords": [
                 "BEAR.Sunday"
             ],
-            "time": "2015-05-19T09:52:02+00:00"
+            "time": "2017-03-16T16:49:49+00:00"
         },
         {
             "name": "bear/package",
-            "version": "1.2.0",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bearsunday/BEAR.Package.git",
-                "reference": "ad94ee128c5a3339159208f2dedd107748530c50"
+                "reference": "49ef1eef1086b6f642b5fcd3fde3b451c698a591"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bearsunday/BEAR.Package/zipball/ad94ee128c5a3339159208f2dedd107748530c50",
-                "reference": "ad94ee128c5a3339159208f2dedd107748530c50",
+                "url": "https://api.github.com/repos/bearsunday/BEAR.Package/zipball/49ef1eef1086b6f642b5fcd3fde3b451c698a591",
+                "reference": "49ef1eef1086b6f642b5fcd3fde3b451c698a591",
                 "shasum": ""
             },
             "require": {
                 "aura/cli": "^2.2",
-                "bear/app-meta": "^1.0",
+                "bear/app-meta": "^1.1",
                 "bear/query-repository": "^1.2",
                 "bear/sunday": "^1.1",
                 "php": ">=5.6.0",
@@ -566,7 +567,7 @@
                 "framework",
                 "rest"
             ],
-            "time": "2017-03-13T12:51:19+00:00"
+            "time": "2017-03-16T18:55:39+00:00"
         },
         {
             "name": "bear/query-repository",
@@ -1818,23 +1819,25 @@
         },
         {
             "name": "ray/compiler",
-            "version": "1.1.0",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ray-di/Ray.Compiler.git",
-                "reference": "df977924f32d53f577a4b8cc029b8c8396d6ef77"
+                "reference": "a2eefb31be561b02f14a22ba407481bbb5ac816e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ray-di/Ray.Compiler/zipball/df977924f32d53f577a4b8cc029b8c8396d6ef77",
-                "reference": "df977924f32d53f577a4b8cc029b8c8396d6ef77",
+                "url": "https://api.github.com/repos/ray-di/Ray.Compiler/zipball/a2eefb31be561b02f14a22ba407481bbb5ac816e",
+                "reference": "a2eefb31be561b02f14a22ba407481bbb5ac816e",
                 "shasum": ""
             },
             "require": {
-                "koriym/printo": "~1.0"
+                "koriym/printo": "~1.0",
+                "php": ">=5.6.0"
             },
             "require-dev": {
-                "ray/di": "~2.0"
+                "phpunit/phpunit": "^5.7",
+                "ray/di": "test-dev"
             },
             "type": "library",
             "autoload": {
@@ -1852,7 +1855,7 @@
                 "code-gen",
                 "compiler"
             ],
-            "time": "2017-02-21T11:23:32+00:00"
+            "time": "2017-03-16T14:29:45+00:00"
         },
         {
             "name": "ray/di",
@@ -2026,12 +2029,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "73603e2e613ddc14e2e11ec6da4e837bf0a2149a"
+                "reference": "66f7b04100fb2a7bdeaaddf02579189e15835056"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/73603e2e613ddc14e2e11ec6da4e837bf0a2149a",
-                "reference": "73603e2e613ddc14e2e11ec6da4e837bf0a2149a",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/66f7b04100fb2a7bdeaaddf02579189e15835056",
+                "reference": "66f7b04100fb2a7bdeaaddf02579189e15835056",
                 "shasum": ""
             },
             "conflict": {
@@ -2056,8 +2059,8 @@
                 "doctrine/mongodb-odm-bundle": ">=2,<3.0.1",
                 "doctrine/orm": ">=2,<2.4.8|>=2.5,<2.5.1",
                 "dompdf/dompdf": ">=0.6,<0.6.2",
-                "drupal/core": ">=8,<8.2.3",
-                "drupal/drupal": ">=8,<8.2.3",
+                "drupal/core": ">=8,<8.2.7",
+                "drupal/drupal": ">=8,<8.2.7",
                 "firebase/php-jwt": "<2",
                 "friendsofsymfony/rest-bundle": ">=1.2,<1.2.2",
                 "friendsofsymfony/user-bundle": ">=1.2,<1.3.5",
@@ -2153,7 +2156,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2017-03-02T15:23:30+00:00"
+            "time": "2017-03-16T14:24:35+00:00"
         },
         {
             "name": "twig/twig",
@@ -2534,16 +2537,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v2.1.1",
+            "version": "v2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "e0e33ce4eaf59ba77ead9ce45256692aa29ecb38"
+                "reference": "c7de769d7b44f2c9de68e1f678b65efd8126f60b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/e0e33ce4eaf59ba77ead9ce45256692aa29ecb38",
-                "reference": "e0e33ce4eaf59ba77ead9ce45256692aa29ecb38",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/c7de769d7b44f2c9de68e1f678b65efd8126f60b",
+                "reference": "c7de769d7b44f2c9de68e1f678b65efd8126f60b",
                 "shasum": ""
             },
             "require": {
@@ -2566,7 +2569,7 @@
             "require-dev": {
                 "gecko-packages/gecko-php-unit": "^2.0",
                 "justinrainbow/json-schema": "^5.0",
-                "phpunit/phpunit": "^4.5|^5",
+                "phpunit/phpunit": "^4.5 || ^5.0",
                 "satooshi/php-coveralls": "^1.0",
                 "symfony/phpunit-bridge": "^3.2"
             },
@@ -2597,7 +2600,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "time": "2017-03-03T08:03:57+00:00"
+            "time": "2017-03-15T17:13:07+00:00"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -3315,16 +3318,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.7.15",
+            "version": "5.7.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "b99112aecc01f62acf3d81a3f59646700a1849e5"
+                "reference": "dafc78e2a7d12139b0e97078d1082326bd09363d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b99112aecc01f62acf3d81a3f59646700a1849e5",
-                "reference": "b99112aecc01f62acf3d81a3f59646700a1849e5",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/dafc78e2a7d12139b0e97078d1082326bd09363d",
+                "reference": "dafc78e2a7d12139b0e97078d1082326bd09363d",
                 "shasum": ""
             },
             "require": {
@@ -3393,7 +3396,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-03-02T15:22:43+00:00"
+            "time": "2017-03-15T13:02:34+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

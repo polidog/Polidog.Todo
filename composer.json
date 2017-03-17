@@ -6,7 +6,7 @@
     "require": {
         "php": "~7.0",
         "roave/security-advisories": "dev-master",
-        "bear/package": "~1.0",
+        "bear/package": "~1.1",
         "josegonzalez/dotenv": "~2.0",
         "madapaja/twig-module": "^1.1",
         "ray/aura-sql-module": "~1.0",

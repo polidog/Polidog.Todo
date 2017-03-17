@@ -16,14 +16,8 @@
         "koriym/http-constants": "^1.0.1"
     },
     "require-dev": {
-        "composer/composer": "~1.0",
-        "phpunit/phpunit": "~4.8 || ~5.2",
-        "squizlabs/php_codesniffer": "~2.5",
-        "phpmd/phpmd": "~2.3",
-        "friendsofphp/php-cs-fixer": "^2.1"
+        "bear/qatools": "~1.0"
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Polidog\\Todo\\": "src/"
@@ -31,11 +25,7 @@
     },
     "scripts": {
         "test": [
-            "composer clean",
-            "phpmd src text ./phpmd.xml",
-            "phpcs src tests",
-            "php-cs-fixer fix --dry-run -v",
-            "phpunit"
+            "phptest"
         ],
         "cs-fix": [
             "php-cs-fixer fix -v"

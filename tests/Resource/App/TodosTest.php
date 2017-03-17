@@ -18,7 +18,8 @@ class TodosTest extends \PHPUnit_Framework_TestCase
 
     public function testOnPost()
     {
-        $page = $this->resource->get->uri('app://self/todos')->withQuery(['status' => TODO::COMPLETE])->eager->request();
+        $page = $this->resource->uri('app://self/todos')(['status' => TODO::COMPLETE]);
+        /* @var $page \BEAR\Resource\ResourceObject */
         $this->assertSame(200, $page->code);
 
         return $page;

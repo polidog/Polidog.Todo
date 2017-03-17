@@ -21,7 +21,8 @@ class IndexTest extends \PHPUnit_Framework_TestCase
 
     public function testOnGet()
     {
-        $page = $this->resource->get->uri('page://self/index')->withQuery([])->eager->request();
+        $page = $this->resource->uri('page://self/index')();
+        /* @var $page ResourceObject */
         $this->assertSame(StatusCode::OK, $page->code);
         $todos = $page['todos'];
         /* @var $todos \BEAR\Resource\AbstractRequest */
@@ -33,8 +34,7 @@ class IndexTest extends \PHPUnit_Framework_TestCase
 
     public function testOnPost()
     {
-        $query = ['title' => 'test'];
-        $page = $this->resource->post->uri('page://self/index')->withQuery($query)->eager->request();
+        $page = $this->resource->post->uri('page://self/index')(['title' => 'test']);
         /* @var $page ResourceObject */
         $this->assertSame(StatusCode::MOVED_PERMANENTLY, $page->code);
         $this->assertSame('/', $page->headers[ResponseHeader::LOCATION]);
@@ -42,8 +42,7 @@ class IndexTest extends \PHPUnit_Framework_TestCase
 
     public function testOnPost400()
     {
-        $query = ['title' => ''];
-        $page = $this->resource->post->uri('page://self/index')->withQuery($query)->eager->request();
+        $page = $this->resource->post->uri('page://self/index')(['title' => '']);
         /* @var $page ResourceObject */
         $this->assertSame(StatusCode::BAD_REQUEST, $page->code);
     }

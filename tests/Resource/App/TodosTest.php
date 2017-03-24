@@ -3,8 +3,9 @@ namespace Polidog\Todo\Resource\App;
 
 use BEAR\Resource\ResourceInterface;
 use BEAR\Package\AppInjector;
+use PHPUnit\Framework\TestCase;
 
-class TodosTest extends \PHPUnit_Framework_TestCase
+class TodosTest extends TestCase
 {
     /**
      * @var \BEAR\Resource\ResourceInterface

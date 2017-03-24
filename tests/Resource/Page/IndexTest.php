@@ -6,8 +6,9 @@ use BEAR\Resource\ResourceObject;
 use Koriym\HttpConstants\ResponseHeader;
 use Koriym\HttpConstants\StatusCode;
 use BEAR\Package\AppInjector;
+use PHPUnit\Framework\TestCase;
 
-class IndexTest extends \PHPUnit_Framework_TestCase
+class IndexTest extends TestCase
 {
     /**
      * @var \BEAR\Resource\ResourceInterface

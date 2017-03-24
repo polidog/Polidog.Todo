@@ -5,8 +5,9 @@ use BEAR\Resource\ResourceInterface;
 use BEAR\Resource\ResourceObject;
 use Koriym\HttpConstants\StatusCode;
 use BEAR\Package\AppInjector;
+use PHPUnit\Framework\TestCase;
 
-class DoneTest extends \PHPUnit_Framework_TestCase
+class DoneTest extends TestCase
 {
     /**
      * @var \BEAR\Resource\ResourceInterface

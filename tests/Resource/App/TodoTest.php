@@ -6,8 +6,9 @@ use BEAR\Resource\ResourceObject;
 use Koriym\HttpConstants\ResponseHeader;
 use Koriym\HttpConstants\StatusCode;
 use BEAR\Package\AppInjector;
+use PHPUnit\Framework\TestCase;
 
-class TodoTest extends \PHPUnit_Framework_TestCase
+class TodoTest extends TestCase
 {
     /**
      * @var \BEAR\Resource\ResourceInterface

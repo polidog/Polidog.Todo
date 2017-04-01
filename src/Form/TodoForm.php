@@ -2,10 +2,29 @@
 namespace Polidog\Todo\Form;
 
 use Aura\Html\Helper\Tag;
+use Ray\Di\Di\Named;
 use Ray\WebFormModule\AbstractForm;
 
 class TodoForm extends AbstractForm
 {
+    /**
+     * complete message
+     *
+     * true: complete
+     * false: incomplete
+     *
+     * @var array
+     */
+    private $msg = [];
+
+    /**
+     * @Named("form_todo")
+     */
+    public function __construct(array $msg)
+    {
+        $this->msg = $msg;
+    }
+
     public function __toString()
     {
         $form = $this->form([
@@ -43,12 +62,12 @@ class TodoForm extends AbstractForm
         $this->setField('submit', 'submit')
             ->setAttribs([
                 'name' => 'submit',
-                'value' => '登録',
+                'value' => $this->msg['submit_button'],
                 'class' => 'btn btn-primary'
             ]);
 
         // validationの設定
         $this->filter->validate('title')->is('strlenMin', 1);
-        $this->filter->useFieldMessage('title', '必ず入力してください');
+        $this->filter->useFieldMessage('title', $this->msg['required']);
     }
 }

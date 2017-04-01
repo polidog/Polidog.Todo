@@ -2,6 +2,7 @@
 namespace Polidog\Todo\Module;
 
 use BEAR\Package\PackageModule;
+use BEAR\Sunday\Module\Constant\NamedModule;
 use josegonzalez\Dotenv\Loader as Dotenv;
 use Koriym\Now\NowModule;
 use Koriym\QueryLocator\QueryLocatorModule;
@@ -26,6 +27,7 @@ class AppModule extends AbstractModule
         $this->install(new PackageModule);
         $this->install(new NowModule);
         $this->install(new QueryLocatorModule($rootDir . '/var/sql'));
+        $this->install(new NamedModule(require $rootDir . '/var/conf/messages.php'));
         // Database
         $dbConfig = 'sqlite:' . $rootDir . '/var/db/todo.sqlite3';
         $this->install(new AuraSqlModule($dbConfig));

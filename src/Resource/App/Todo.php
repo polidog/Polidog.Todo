@@ -8,6 +8,7 @@ use Koriym\Now\NowInterface;
 use Koriym\QueryLocator\QueryLocatorInject;
 use Ray\AuraSqlModule\AuraSqlInject;
 use Ray\Di\Di\Assisted;
+use Ray\Di\Di\Named;
 
 class Todo extends ResourceObject
 {
@@ -17,6 +18,24 @@ class Todo extends ResourceObject
     const INCOMPLETE = 1;
     const COMPLETE = 2;
 
+    /**
+     * complete message
+     *
+     * true: complete
+     * false: incomplete
+     *
+     * @var array
+     */
+    private $msg = [];
+
+    /**
+     * @Named("app_todo")
+     */
+    public function __construct(array $msg)
+    {
+        $this->msg = $msg;
+    }
+
     public function onGet(string $id) : ResourceObject
     {
         $todo = $this->pdo->fetchOne($this->query['todo_select'], ['id' => $id]);
@@ -25,7 +44,7 @@ class Todo extends ResourceObject
 
             return $this;
         }
-        $todo['status_name'] = $todo['status'] == self::INCOMPLETE ? '完了' : '未完了';
+        $todo['status_name'] = $todo['status'] == self::INCOMPLETE ? $this->msg[true] : $this->msg[false];
         $this['todo'] = $todo;
 
         return $this;

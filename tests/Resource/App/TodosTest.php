@@ -1,10 +1,11 @@
 <?php
 namespace Polidog\Todo\Resource\App;
 
+use BEAR\Package\AppInjector;
 use BEAR\Resource\ResourceInterface;
-use Polidog\Todo\AppInjector;
+use PHPUnit\Framework\TestCase;
 
-class TodosTest extends \PHPUnit_Framework_TestCase
+class TodosTest extends TestCase
 {
     /**
      * @var \BEAR\Resource\ResourceInterface
@@ -18,7 +19,8 @@ class TodosTest extends \PHPUnit_Framework_TestCase
 
     public function testOnPost()
     {
-        $page = $this->resource->get->uri('app://self/todos')->withQuery(['status' => TODO::COMPLETE])->eager->request();
+        $page = $this->resource->uri('app://self/todos')(['status' => TODO::COMPLETE]);
+        /* @var $page \BEAR\Resource\ResourceObject */
         $this->assertSame(200, $page->code);
 
         return $page;

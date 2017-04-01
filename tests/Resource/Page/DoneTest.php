@@ -1,11 +1,13 @@
 <?php
 namespace Polidog\Todo\Resource\Page;
 
+use BEAR\Package\AppInjector;
 use BEAR\Resource\ResourceInterface;
+use BEAR\Resource\ResourceObject;
 use Koriym\HttpConstants\StatusCode;
-use Polidog\Todo\AppInjector;
+use PHPUnit\Framework\TestCase;
 
-class DoneTest extends \PHPUnit_Framework_TestCase
+class DoneTest extends TestCase
 {
     /**
      * @var \BEAR\Resource\ResourceInterface
@@ -20,15 +22,15 @@ class DoneTest extends \PHPUnit_Framework_TestCase
     public function testOnGet()
     {
         $query = ['id' => $this->getId()];
-        $page = $this->resource->get->uri('page://self/done')->withQuery($query)->eager->request();
+        $page = $this->resource->uri('page://self/done')($query);
+        /* @var $page ResourceObject */
         $this->assertSame(StatusCode::PERMANENT_REDIRECT, $page->code);
     }
 
     public function getId()
     {
-        $query = ['title' => 'test'];
-        $this->resource->post->uri('app://self/todo')->withQuery($query)->eager->request();
-        $body = $this->resource->get->uri('app://self/todos')->withQuery([])->eager->request()->body;
+        $this->resource->post->uri('app://self/todo')(['title' => 'test']);
+        $body = $this->resource->uri('app://self/todos')()->body;
         $id = $body[0]['id'];
 
         return $id;

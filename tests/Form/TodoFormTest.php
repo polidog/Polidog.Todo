@@ -1,9 +1,10 @@
 <?php
 namespace Polidog\Todo\Form;
 
+use PHPUnit\Framework\TestCase;
 use Ray\WebFormModule\FormFactory;
 
-class TodoFormTest extends \PHPUnit_Framework_TestCase
+class TodoFormTest extends TestCase
 {
     /**
      * @var TodoForm

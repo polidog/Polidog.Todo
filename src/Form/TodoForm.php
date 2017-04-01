@@ -8,10 +8,10 @@ use Ray\WebFormModule\AbstractForm;
 class TodoForm extends AbstractForm
 {
     /**
-     * complete message
+     * Form message
      *
-     * true: complete
-     * false: incomplete
+     * submit_button: a name of button
+     * required: required error message
      *
      * @var array
      */

@@ -16,4 +16,4 @@ $ composer setup
 $ composer serve
 ```
 
-![](/bear.png)
+![](/docs/bear.png)

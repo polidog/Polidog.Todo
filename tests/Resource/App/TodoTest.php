@@ -1,13 +1,14 @@
 <?php
 namespace Polidog\Todo\Resource\App;
 
+use BEAR\Package\AppInjector;
 use BEAR\Resource\ResourceInterface;
 use BEAR\Resource\ResourceObject;
 use Koriym\HttpConstants\ResponseHeader;
 use Koriym\HttpConstants\StatusCode;
-use Polidog\Todo\AppInjector;
+use PHPUnit\Framework\TestCase;
 
-class TodoTest extends \PHPUnit_Framework_TestCase
+class TodoTest extends TestCase
 {
     /**
      * @var \BEAR\Resource\ResourceInterface
@@ -21,8 +22,8 @@ class TodoTest extends \PHPUnit_Framework_TestCase
 
     public function testOnPost()
     {
-        $query = ['title' => 'test'];
-        $page = $this->resource->post->uri('app://self/todo')->withQuery($query)->eager->request();
+        $page = $this->resource->post->uri('app://self/todo')(['title' => 'test']);
+        /* @var $page ResourceObject */
         $this->assertSame(StatusCode::CREATED, $page->code);
 
         return $page;
@@ -34,13 +35,15 @@ class TodoTest extends \PHPUnit_Framework_TestCase
     public function testOnGet(ResourceObject $ro)
     {
         $location = $ro->headers[ResponseHeader::LOCATION];
-        $page = $this->resource->get->uri('app://self' .  $location)->eager->request();
+        $page = $this->resource->uri('app://self' . $location)();
+        /* @var $page ResourceObject */
         $this->assertSame(StatusCode::OK, $page->code);
     }
 
     public function testOnGet404()
     {
-        $page = $this->resource->get->uri('app://self/todo?id=0')->eager->request();
+        $page = $this->resource->uri('app://self/todo?id=0')();
+        /* @var $page ResourceObject */
         $this->assertSame(StatusCode::NOT_FOUND, $page->code);
     }
 
@@ -50,10 +53,11 @@ class TodoTest extends \PHPUnit_Framework_TestCase
     public function testOnPut(ResourceObject $ro)
     {
         $location = $ro->headers[ResponseHeader::LOCATION];
-        $query = ['status' => Todo::COMPLETE];
-        $page = $this->resource->put->uri('app://self' .  $location)->addQuery($query)->eager->request();
+        $page = $this->resource->put->uri('app://self' . $location)(['status' => Todo::COMPLETE]);
+        /* @var $page ResourceObject */
         $this->assertSame(StatusCode::NO_CONTENT, $page->code);
-        $get = $this->resource->get->uri('app://self' .  $location)->eager->request();
+        $get = $this->resource->uri('app://self' . $location)();
+        /* @var $get ResourceObject */
         $status = $get->body['todo']['status'];
         $this->assertSame(Todo::COMPLETE, (int) $status);
     }
@@ -64,9 +68,11 @@ class TodoTest extends \PHPUnit_Framework_TestCase
     public function testDelete(ResourceObject $ro)
     {
         $location = $ro->headers[ResponseHeader::LOCATION];
-        $page = $this->resource->delete->uri('app://self' .  $location)->eager->request();
+        $page = $this->resource->delete->uri('app://self' . $location)();
+        /* @var $page ResourceObject */
         $this->assertSame(StatusCode::NO_CONTENT, $page->code);
-        $page = $this->resource->get->uri('app://self' .  $location)->eager->request();
+        $page = $this->resource->uri('app://self' . $location)();
+        /* @var $page ResourceObject */
         $this->assertSame(StatusCode::NOT_FOUND, $page->code);
     }
 }

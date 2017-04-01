@@ -1,11 +1,11 @@
 <?php
 namespace Polidog\Todo\Resource\App;
 
+use BEAR\Package\AppInjector;
 use BEAR\Resource\ResourceInterface;
 use BEAR\Resource\ResourceObject;
 use Koriym\HttpConstants\ResponseHeader;
 use Koriym\HttpConstants\StatusCode;
-use BEAR\Package\AppInjector;
 use PHPUnit\Framework\TestCase;
 
 class TodoTest extends TestCase
@@ -35,7 +35,7 @@ class TodoTest extends TestCase
     public function testOnGet(ResourceObject $ro)
     {
         $location = $ro->headers[ResponseHeader::LOCATION];
-        $page = $this->resource->uri('app://self' .  $location)();
+        $page = $this->resource->uri('app://self' . $location)();
         /* @var $page ResourceObject */
         $this->assertSame(StatusCode::OK, $page->code);
     }
@@ -53,10 +53,10 @@ class TodoTest extends TestCase
     public function testOnPut(ResourceObject $ro)
     {
         $location = $ro->headers[ResponseHeader::LOCATION];
-        $page = $this->resource->put->uri('app://self' .  $location)(['status' => Todo::COMPLETE]);
+        $page = $this->resource->put->uri('app://self' . $location)(['status' => Todo::COMPLETE]);
         /* @var $page ResourceObject */
         $this->assertSame(StatusCode::NO_CONTENT, $page->code);
-        $get = $this->resource->uri('app://self' .  $location)();
+        $get = $this->resource->uri('app://self' . $location)();
         /* @var $get ResourceObject */
         $status = $get->body['todo']['status'];
         $this->assertSame(Todo::COMPLETE, (int) $status);
@@ -68,10 +68,10 @@ class TodoTest extends TestCase
     public function testDelete(ResourceObject $ro)
     {
         $location = $ro->headers[ResponseHeader::LOCATION];
-        $page = $this->resource->delete->uri('app://self' .  $location)();
+        $page = $this->resource->delete->uri('app://self' . $location)();
         /* @var $page ResourceObject */
         $this->assertSame(StatusCode::NO_CONTENT, $page->code);
-        $page = $this->resource->uri('app://self' .  $location)();
+        $page = $this->resource->uri('app://self' . $location)();
         /* @var $page ResourceObject */
         $this->assertSame(StatusCode::NOT_FOUND, $page->code);
     }

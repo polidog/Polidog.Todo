@@ -1,11 +1,11 @@
 <?php
 namespace Polidog\Todo\Resource\Page;
 
+use BEAR\Package\AppInjector;
 use BEAR\Resource\ResourceInterface;
 use BEAR\Resource\ResourceObject;
 use Koriym\HttpConstants\ResponseHeader;
 use Koriym\HttpConstants\StatusCode;
-use BEAR\Package\AppInjector;
 use PHPUnit\Framework\TestCase;
 
 class IndexTest extends TestCase
@@ -50,6 +50,8 @@ class IndexTest extends TestCase
 
     /**
      * @depends testOnGet
+     *
+     * @param mixed $page
      */
     public function testView($page)
     {

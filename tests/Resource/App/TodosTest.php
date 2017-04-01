@@ -1,8 +1,8 @@
 <?php
 namespace Polidog\Todo\Resource\App;
 
-use BEAR\Resource\ResourceInterface;
 use BEAR\Package\AppInjector;
+use BEAR\Resource\ResourceInterface;
 use PHPUnit\Framework\TestCase;
 
 class TodosTest extends TestCase

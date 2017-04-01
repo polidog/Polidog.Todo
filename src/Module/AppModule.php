@@ -24,16 +24,14 @@ class AppModule extends AbstractModule
             'toEnv' => true
         ]);
         $this->install(new PackageModule);
-
+        $this->install(new NowModule);
+        $this->install(new QueryLocatorModule($rootDir . '/var/sql'));
         // Database
         $dbConfig = 'sqlite:' . $rootDir . '/var/db/todo.sqlite3';
         $this->install(new AuraSqlModule($dbConfig));
-
         // Form
-        $this->install(new AuraInputModule());
+        $this->install(new AuraInputModule);
         $this->bind(TodoForm::class);
         $this->bind(FormInterface::class)->annotatedWith('todo_form')->to(TodoForm::class);
-        $this->install(new NowModule());
-        $this->install(new QueryLocatorModule($rootDir . '/var/sql'));
     }
 }

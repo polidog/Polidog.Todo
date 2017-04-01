@@ -1,8 +1,8 @@
 <?php
 namespace Polidog\Todo\Form;
 
+use BEAR\Package\AppInjector;
 use PHPUnit\Framework\TestCase;
-use Ray\WebFormModule\FormFactory;
 
 class TodoFormTest extends TestCase
 {
@@ -13,7 +13,7 @@ class TodoFormTest extends TestCase
 
     protected function setUp()
     {
-        $this->form = (new FormFactory())->newInstance(TodoForm::class);
+        $this->form = (new AppInjector('Polidog\Todo', 'html-app'))->getInstance(TodoForm::class);
     }
 
     public function testFailedEmpty()
@@ -29,7 +29,7 @@ class TodoFormTest extends TestCase
         $isValid = $this->form->apply($submit);
         $this->assertFalse($isValid);
         $msg = $this->form->getFailureMessages();
-        $expected = ['title' => ['必ず入力してください']];
+        $expected = ['title' => ['Required']];
         $this->assertSame($expected, $msg);
     }
 
@@ -45,7 +45,7 @@ class TodoFormTest extends TestCase
         $formHtml = (string) $this->form;
         $expected = '<form method="post" action="/" enctype="multipart/form-data"><div class="form-group"><input id="title" type="text" name="title" class="form-control" size="20" />
 </div>
-<input type="submit" name="submit" value="登録" class="btn btn-primary" />
+<input type="submit" name="submit" value="Add" class="btn btn-primary" />
 </form>';
         $this->assertSame($expected, $formHtml);
     }

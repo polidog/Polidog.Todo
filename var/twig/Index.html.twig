@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <h1 class="page-header">タスク</h1>
+    <h1 class="page-header">Todos</h1>
     <div class="row">
         <div class="col-sm-8">
             <div class="panel panel-default">
-                <div class="panel-heading">タスク一覧</div>
+                <div class="panel-heading">The table of todos</div>
                 <div class="panel-body">
                     <ul class="nav nav-tabs">
-                        <li role="presentation"{% if status == 0 %} class="active"{% endif %}><a href="/">すべて</a></li>
-                        <li role="presentation"{% if status == 1 %} class="active"{% endif %}><a href="/?status=1">未完了</a></li>
-                        <li role="presentation"{% if status == 2 %} class="active"{% endif %}><a href="/?status=2">完了</a></li>
+                        <li role="presentation"{% if status == 0 %} class="active"{% endif %}><a href="/">All</a></li>
+                        <li role="presentation"{% if status == 1 %} class="active"{% endif %}><a href="/?status=1">Incomplete</a></li>
+                        <li role="presentation"{% if status == 2 %} class="active"{% endif %}><a href="/?status=2">Complete</a></li>
                     </ul>
 
                     {% if todos %}
@@ -41,7 +41,7 @@
 
                     {% else %}
                         <div class="panel-body">
-                            <p>タスクがありません</p>
+                            <p>No todos now.</p>
                         </div>
                     {% endif %}
                 </div>
@@ -50,7 +50,7 @@
         </div>
         <div class="col-sm-4">
             <div class="panel panel-default">
-                <div class="panel-heading">新規作成</div>
+                <div class="panel-heading">New</div>
                 <div class="panel-body">
                         {{ todo_form|raw }}
                 </div>

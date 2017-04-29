@@ -11,7 +11,7 @@ class TestModule extends AbstractModule
      */
     protected function configure()
     {
-        // Database
+        // install testing data
         $dbConfig = 'sqlite:' . dirname(dirname(__DIR__)) . '/var/db/todo_test.sqlite3';
         $this->install(new AuraSqlModule($dbConfig));
     }

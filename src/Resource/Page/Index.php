@@ -33,7 +33,7 @@ class Index extends ResourceObject
      */
     public function onGet(string $status = null) : ResourceObject
     {
-        $this['todo_form'] = $this->todoForm;
+        $this['todo_form'] = (string) $this->todoForm;
         $this['status'] = (int) $status;
 
         return $this;

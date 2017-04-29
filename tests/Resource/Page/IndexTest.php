@@ -50,10 +50,8 @@ class IndexTest extends TestCase
 
     /**
      * @depends testOnGet
-     *
-     * @param mixed $page
      */
-    public function testView($page)
+    public function testView(ResourceObject $page)
     {
         $html = (string) $page;
         $this->assertStringStartsWith('<!DOCTYPE html>', $html);

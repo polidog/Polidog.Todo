@@ -10,7 +10,7 @@ $app = (new Bootstrap)->getApp('Polidog\Todo', $context, dirname(__DIR__));
 /* @var $app \Polidog\Todo\Module\App */
 if ($app->httpCache->isNotModified($_SERVER)) {
     http_response_code(304);
-    exit;
+    exit(0);
 }
 $request = $app->router->match($GLOBALS, $_SERVER);
 

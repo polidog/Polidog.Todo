@@ -7,6 +7,11 @@ require dirname(__DIR__) . '/bin/autoload.php';
 
 /* @global string $context */
 $app = (new Bootstrap)->getApp('Polidog\Todo', $context, dirname(__DIR__));
+/* @var $app \Polidog\Todo\Module\App */
+if ($app->httpCache->isNotModified($_SERVER)) {
+    http_response_code(304);
+    exit;
+}
 $request = $app->router->match($GLOBALS, $_SERVER);
 
 try {

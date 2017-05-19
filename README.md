@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/polidog/Polidog.Todo.svg?branch=master)](https://travis-ci.org/polidog/Polidog.Todo)
 
-This is a "Todos" example app built on the principles described in the [Coding Guide](http://bearsunday.github.io/manuals/1.0/en/coding-guide.html). 
+This is a "Todos" example app built on the principles described in the [Coding Guide](http://bearsunday.github.io/manuals/1.0/en/coding-guide.html).
 
 Optional modules:
 
@@ -11,7 +11,6 @@ Optional modules:
   * [madapaja/twig-module](https://github.com/madapaja/Madapaja.TwigModule) - Twig template engine
   * [koriym/now](https://github.com/koriym/Koriym.Now) - Current datetime
   * [koriym/query-locator](https://github.com/koriym/Koriym.QueryLocator) - SQL locator
-  * [koriym/http-constants](https://github.com/koriym/Koriym.HttpConstants) - Contains the values HTTP
 
 ## Prerequirests
 

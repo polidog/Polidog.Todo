@@ -34,6 +34,12 @@ class Index extends ResourceObject
     }
 
     /**
+     * Todos list
+     *
+     * Returns the todos list specified by status
+     *
+     * @param string $status todo status
+     *
      * @Embed(rel="todos", src="app://self/todos{?status}")
      */
     public function onGet(string $status = null) : ResourceObject
@@ -45,6 +51,12 @@ class Index extends ResourceObject
     }
 
     /**
+     * Create todo
+     *
+     * Create todo and add to todos list
+     *
+     * @param string $title todo title
+     *
      * @FormValidation(form="todoForm", onFailure="onFailure")
      * @Link(rel="create", href="app://self/todo", method="post")
      * @Refresh(uri="page://self/index")

@@ -12,13 +12,12 @@ class Index extends ResourceObject
     public $body = [
         '_links' => [
             'pd:todo' => ['href' => '/todo'],
-            'pd:todos' => ['href' =>'/todos']
+            'pd:todos' => ['href' => '/todos']
         ]
     ];
 
     public function onGet()
     {
-
         return $this;
     }
 }

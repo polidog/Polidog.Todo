@@ -1,6 +1,7 @@
 <?php
 namespace Polidog\Todo\Resource\App;
 
+use BEAR\Package\Annotation\ReturnCreatedResource;
 use BEAR\Resource\ResourceObject;
 use Koriym\HttpConstants\ResponseHeader;
 use Koriym\HttpConstants\StatusCode;
@@ -52,6 +53,8 @@ class Todo extends ResourceObject
 
     /**
      * @Assisted("now")
+     *
+     * @ReturnCreatedResource
      */
     public function onPost(string $title, NowInterface $now = null) : ResourceObject
     {

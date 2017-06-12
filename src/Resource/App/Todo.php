@@ -1,6 +1,8 @@
 <?php
 namespace Polidog\Todo\Resource\App;
 
+use BEAR\Package\Annotation\ReturnCreatedResource;
+use BEAR\Resource\Annotation\JsonSchema;
 use BEAR\Resource\ResourceObject;
 use Koriym\HttpConstants\ResponseHeader;
 use Koriym\HttpConstants\StatusCode;
@@ -36,6 +38,9 @@ class Todo extends ResourceObject
         $this->msg = $msg;
     }
 
+    /**
+     * @JsonSchema
+     */
     public function onGet(string $id) : ResourceObject
     {
         $todo = $this->pdo->fetchOne($this->query['todo_select'], ['id' => $id]);
@@ -52,6 +57,8 @@ class Todo extends ResourceObject
 
     /**
      * @Assisted("now")
+     *
+     * @ReturnCreatedResource
      */
     public function onPost(string $title, NowInterface $now = null) : ResourceObject
     {

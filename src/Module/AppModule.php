@@ -2,6 +2,7 @@
 namespace Polidog\Todo\Module;
 
 use BEAR\Package\PackageModule;
+use BEAR\Resource\Module\JsonSchemalModule;
 use BEAR\Sunday\Module\Constant\NamedModule;
 use josegonzalez\Dotenv\Loader as Dotenv;
 use Koriym\Now\NowModule;
@@ -28,6 +29,7 @@ class AppModule extends AbstractModule
         $this->install(new NowModule);
         $this->install(new QueryLocatorModule($rootDir . '/var/sql'));
         $this->install(new NamedModule(require $rootDir . '/var/conf/messages.php'));
+        $this->install(new JsonSchemalModule);
         // Database
         $dbConfig = 'sqlite:' . $rootDir . '/var/db/todo.sqlite3';
         $this->install(new AuraSqlModule($dbConfig));

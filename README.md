@@ -1,5 +1,8 @@
 # BEAR Sunday sample todo
 
+最新のコードはフォークされ[koriym/Polidog.Todo]（https://github.com/koriym/Polidog.Todo）のほうなので、そちらを参照してください。
+
+
 [![Build Status](https://travis-ci.org/polidog/Polidog.Todo.svg?branch=master)](https://travis-ci.org/polidog/Polidog.Todo)
 
 BEAR Sundayで簡単なTodoアプリを作成してみました。

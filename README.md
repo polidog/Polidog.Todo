@@ -1,6 +1,7 @@
 # BEAR Sunday sample todo
 
-最新のコードはフォークされhttps://github.com/koriym/Polidog.Todoのほうなので、そちらを参照してください。
+最新のコードはこっち[https://github.com/koriym/Polidog.Todo](https://github.com/koriym/Polidog.Todo)
+
 
 
 [![Build Status](https://travis-ci.org/polidog/Polidog.Todo.svg?branch=master)](https://travis-ci.org/polidog/Polidog.Todo)
